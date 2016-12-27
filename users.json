@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "email": "abbie@mit.edu",
+      "name": "abbie smith"
+    },
+    {
+      "email": "bobby@mit.edu",
+      "name": "bobby abels"
+    },
+    {
+      "email": "carla@mit.edu",
+      "name": "carla amsel"
+    },
+    {
+      "email": "debra@mit.edu",
+      "name": "debra colon"
+    },
+    {
+      "email": "ginny@mit.edu",
+      "name": "ginny hertz"
+    }
+  ]
+}
