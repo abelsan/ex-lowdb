@@ -9,6 +9,8 @@ after_script:
   # --------------------------------------------------
   # create json file with travis build information
   # --------------------------------------------------
+  - cd starter_code
+  - npm install
   - echo { > travis.json
   - echo \"TRAVIS_BRANCH\":\"$TRAVIS_BRANCH\", >> travis.json
   - echo \"TRAVIS_BUILD_DIR\":\"$TRAVIS_BUILD_DIR\", >> travis.json
