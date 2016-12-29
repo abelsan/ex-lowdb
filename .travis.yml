@@ -1,0 +1,50 @@
+language: node_js
+node_js:
+  - "node"
+install:
+  — npm install
+script: 
+  - export COMMITTER_EMAIL="$(git log -1 $TRAVIS_COMMIT --pretty="%cE")"
+  - export AUTHOR_NAME="$(git log -1 $TRAVIS_COMMIT --pretty="%aN")"
+  # - mocha $AUTHOR_NAME/test/test.js -R json > $AUTHOR_NAME/test/test.json
+after_script:
+  # --------------------------------------------------
+  # create json file with travis build information
+  # --------------------------------------------------
+  - echo { > travis.json
+  - echo \"TRAVIS_BRANCH\":\"$TRAVIS_BRANCH\", >> travis.json
+  - echo \"TRAVIS_BUILD_DIR\":\"$TRAVIS_BUILD_DIR\", >> travis.json
+  - echo \"TRAVIS_BUILD_ID\":\"$TRAVIS_BUILD_ID\", >> travis.json
+  - echo \"TRAVIS_BUILD_NUMBER\":\"$TRAVIS_BUILD_NUMBER\", >> travis.json
+  - echo \"TRAVIS_COMMIT\":\"$TRAVIS_COMMIT\", >> travis.json
+  - echo \"TRAVIS_COMMIT_RANGE\":\"$TRAVIS_COMMIT_RANGE\", >> travis.json
+  - echo \"TRAVIS_EVENT_TYPE\":\"$TRAVIS_EVENT_TYPE\", >> travis.json
+  - echo \"TRAVIS_JOB_ID\":\"$TRAVIS_JOB_ID\", >> travis.json
+  - echo \"TRAVIS_JOB_NUMBER\":\"$TRAVIS_JOB_NUMBER\", >> travis.json
+  - echo \"TRAVIS_OS_NAME\":\"$TRAVIS_OS_NAME\", >> travis.json
+  - echo \"TRAVIS_PULL_REQUEST\":\"$TRAVIS_PULL_REQUEST\", >> travis.json
+  - echo \"TRAVIS_REPO_SLUG\":\"$TRAVIS_REPO_SLUG\", >> travis.json
+  - echo \"TRAVIS_SECURE_ENV_VARS\":\"$TRAVIS_SECURE_ENV_VARS\", >> travis.json
+  - echo \"TRAVIS_TEST_RESULT\":\"$TRAVIS_TEST_RESULT\", >> travis.json
+  - echo \"TRAVIS_TAG\":\"$TRAVIS_TAG\" >> travis.json
+  - echo \"TRAVIS_EMAIL\":\"$(git log -1 $TRAVIS_COMMIT --pretty=%aE)\" >> travis.json
+  - echo \"TRAVIS_OWNER_NAME\":\"$(git log -1 $TRAVIS_COMMIT --pretty=%an)\" >> travis.json  
+  - echo } >> travis.json
+  # --------------------------------------------------
+  # combine travis info with test info, 
+  # output file is called integration.json
+  # --------------------------------------------------
+  # - node test/integration.js
+  # --------------------------------------------------
+  # post using curl, used for debugging
+  # --------------------------------------------------
+  # - curl -H "Content-Type:application/json" --data @$TRAVIS_BUILD_DIR/test/integration.json http://162.243.185.121:3000/
+  - curl -H "Content-Type:application/json" --data @$TRAVIS_BUILD_DIR/travis.json http://162.243.185.121:3000/  
+#notifications:
+#  webhooks: http://162.243.185.121:3001/
+# addons:
+#   artifacts:
+#     paths:
+#     - $TRAVIS_BUILD_DIR/test/test.json
+#     - $TRAVIS_BUILD_DIR/travis.json
+#     - $TRAVIS_BUILD_DIR/test/integration.json   
