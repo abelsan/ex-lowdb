@@ -2,8 +2,8 @@ language: node_js
 node_js:
   - "node"
 script: 
-  - export COMMITTER_EMAIL="$(git log -1 $TRAVIS_COMMIT --pretty="%cE")"
-  - export AUTHOR_NAME="$(git log -1 $TRAVIS_COMMIT --pretty="%aN")"
+  - export GITUSER_EMAIL="$(git log -1 $TRAVIS_COMMIT --pretty="%cE")"
+  - export GITUSER_NAME="$(git log -1 $TRAVIS_COMMIT --pretty="%aN")"
   # - mocha $AUTHOR_NAME/test/test.js -R json > $AUTHOR_NAME/test/test.json
 after_script:
   # --------------------------------------------------
@@ -28,6 +28,9 @@ after_script:
   - echo \"TRAVIS_EMAIL\":\"$(git log -1 $TRAVIS_COMMIT --pretty=%aE)\" >> travis.json
   - echo \"TRAVIS_OWNER_NAME\":\"$(git log -1 $TRAVIS_COMMIT --pretty=%an)\" >> travis.json  
   - echo } >> travis.json
+  - more travis.json
+  - echo $GITUSER_EMAIL
+  - echo $GITUSER_NAME
   # --------------------------------------------------
   # combine travis info with test info, 
   # output file is called integration.json
