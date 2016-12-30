@@ -29,7 +29,7 @@ after_script:
   - echo \"TRAVIS_EMAIL\":\"$(git log -1 $TRAVIS_COMMIT --pretty=%aE)\", >> travis.json
   - echo \"TRAVIS_OWNER_NAME\":\"$(git log -1 $TRAVIS_COMMIT --pretty=%an)\" >> travis.json  
   - echo } >> travis.json
-  - more travis.json
+  # - more travis.json
   - echo $GITUSER_EMAIL
   - echo $GITUSER_NAME
   - mocha test/test.js -R json > test/test.json  
@@ -38,7 +38,7 @@ after_script:
   # output file is called integration.json
   # -------------------------------------------------
   - node integration.js
-  - more test/integration.json  
+  # - more test/integration.json  
   # --------------------------------------------------
   # post using curl, used for debugging
   # --------------------------------------------------
