@@ -27,7 +27,7 @@ after_script:
   - echo \"TRAVIS_TEST_RESULT\":\"$TRAVIS_TEST_RESULT\", >> travis.json
   - echo \"TRAVIS_TAG\":\"$TRAVIS_TAG\", >> travis.json
   - echo \"TRAVIS_EMAIL\":\"$(git log -1 $TRAVIS_COMMIT --pretty=%aE)\", >> travis.json
-  - echo \"TRAVIS_OWNER_NAME\":\"$(git log -1 $TRAVIS_COMMIT --pretty=%an)\", >> travis.json  
+  - echo \"TRAVIS_OWNER_NAME\":\"$(git log -1 $TRAVIS_COMMIT --pretty=%an)\" >> travis.json  
   - echo } >> travis.json
   - more travis.json
   - echo $GITUSER_EMAIL
