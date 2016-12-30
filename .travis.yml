@@ -32,18 +32,18 @@ after_script:
   # - more travis.json
   - echo $GITUSER_EMAIL
   - echo $GITUSER_NAME
-  - mocha test/test.js -R json > test/test.json  
-  # -------------------------------------------------
+  # - mocha test/test.js -R json > test/test.json  
+  # --------------------------------------------------
   # combine travis info with test info, 
   # output file is called integration.json
-  # -------------------------------------------------
-  - node integration.js
+  # --------------------------------------------------
+  # - node integration.js
   # - more test/integration.json  
   # --------------------------------------------------
   # post using curl, used for debugging
   # --------------------------------------------------
   # - curl -H "Content-Type:application/json" --data @$TRAVIS_BUILD_DIR/test/integration.json http://162.243.185.121:3000/
-  - curl -H "Content-Type:application/json" --data @$TRAVIS_BUILD_DIR/starter_code/test/integration.json http://162.243.185.121:3000/  
+  # - curl -H "Content-Type:application/json" --data @$TRAVIS_BUILD_DIR/starter_code/test/integration.json http://162.243.185.121:3000/  
 #notifications:
 #  webhooks: http://162.243.185.121:3001/
 # addons:
