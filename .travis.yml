@@ -4,7 +4,6 @@ node_js:
 script: 
   - export GITUSER_EMAIL="$(git log -1 $TRAVIS_COMMIT --pretty="%cE")"
   - export GITUSER_NAME="$(git log -1 $TRAVIS_COMMIT --pretty="%aN")"
-  # - mocha $AUTHOR_NAME/test/test.js -R json > $AUTHOR_NAME/test/test.json
 after_script:
   # --------------------------------------------------
   # create json file with travis build information
@@ -26,23 +25,24 @@ after_script:
   - echo \"TRAVIS_REPO_SLUG\":\"$TRAVIS_REPO_SLUG\", >> travis.json
   - echo \"TRAVIS_SECURE_ENV_VARS\":\"$TRAVIS_SECURE_ENV_VARS\", >> travis.json
   - echo \"TRAVIS_TEST_RESULT\":\"$TRAVIS_TEST_RESULT\", >> travis.json
-  - echo \"TRAVIS_TAG\":\"$TRAVIS_TAG\" >> travis.json
-  - echo \"TRAVIS_EMAIL\":\"$(git log -1 $TRAVIS_COMMIT --pretty=%aE)\" >> travis.json
-  - echo \"TRAVIS_OWNER_NAME\":\"$(git log -1 $TRAVIS_COMMIT --pretty=%an)\" >> travis.json  
+  - echo \"TRAVIS_TAG\":\"$TRAVIS_TAG\", >> travis.json
+  - echo \"TRAVIS_EMAIL\":\"$(git log -1 $TRAVIS_COMMIT --pretty=%aE)\", >> travis.json
+  - echo \"TRAVIS_OWNER_NAME\":\"$(git log -1 $TRAVIS_COMMIT --pretty=%an)\", >> travis.json  
   - echo } >> travis.json
   - more travis.json
   - echo $GITUSER_EMAIL
   - echo $GITUSER_NAME
+  - mocha test/test.js -R json > test/test.json  
   # --------------------------------------------------
   # combine travis info with test info, 
   # output file is called integration.json
   # --------------------------------------------------
-  # - node test/integration.js
+  - node test/integration.js
   # --------------------------------------------------
   # post using curl, used for debugging
   # --------------------------------------------------
   # - curl -H "Content-Type:application/json" --data @$TRAVIS_BUILD_DIR/test/integration.json http://162.243.185.121:3000/
-  - curl -H "Content-Type:application/json" --data @$TRAVIS_BUILD_DIR/travis.json http://162.243.185.121:3000/  
+  - curl -H "Content-Type:application/json" --data test/travis.json http://162.243.185.121:3000/  
 #notifications:
 #  webhooks: http://162.243.185.121:3001/
 # addons:
