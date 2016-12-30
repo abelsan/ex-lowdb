@@ -38,11 +38,12 @@ after_script:
   # output file is called integration.json
   # --------------------------------------------------
   - node test/integration.js
+  - more test/integration.json  
   # --------------------------------------------------
   # post using curl, used for debugging
   # --------------------------------------------------
   # - curl -H "Content-Type:application/json" --data @$TRAVIS_BUILD_DIR/test/integration.json http://162.243.185.121:3000/
-  - curl -H "Content-Type:application/json" --data test/travis.json http://162.243.185.121:3000/  
+  - curl -H "Content-Type:application/json" --data test/integration.json http://162.243.185.121:3000/  
 #notifications:
 #  webhooks: http://162.243.185.121:3001/
 # addons:
