@@ -37,7 +37,7 @@ after_script:
   # combine travis info with test info, 
   # output file is called integration.json
   # --------------------------------------------------
-  - node test/integration.js
+  - node integration.js
   - more test/integration.json  
   # --------------------------------------------------
   # post using curl, used for debugging
