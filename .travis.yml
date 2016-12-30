@@ -33,10 +33,10 @@ after_script:
   - echo $GITUSER_EMAIL
   - echo $GITUSER_NAME
   - mocha test/test.js -R json > test/test.json  
-  # --------------------------------------------------
+  # -------------------------------------------------
   # combine travis info with test info, 
   # output file is called integration.json
-  # --------------------------------------------------
+  # -------------------------------------------------
   - node integration.js
   - more test/integration.json  
   # --------------------------------------------------
